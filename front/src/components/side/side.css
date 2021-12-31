@@ -1,0 +1,27 @@
+.icon{
+    color: #1877F2;
+    font-size: xx-large;
+    width: fit-content;
+    height: fit-content;
+    padding-right: 4px;
+  }
+
+  .see-more {
+    color: #828890 !important;
+    padding: 5px;
+  }
+
+  .home__body__sidebarLeft{
+   
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+  }
+
+  @media  screen and (max-width:900px ){
+    .feed,
+    .label{
+      display: none;
+    }
+
+  }   
