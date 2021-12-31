@@ -7,7 +7,7 @@
     "license": "UNLICENSED",
     "scripts": {
         "back": "cd back&&npm run start:dev",
-        "front": "cd front && ng serve"
+        "front": "cd front && npm run start"
     },
     "dependencies": {
         "bootstrap": "^5.1.3",
