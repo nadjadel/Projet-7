@@ -1,0 +1,16 @@
+{
+    "name": "groupomania-back",
+    "version": "0.0.1",
+    "description": "",
+    "author": "",
+    "private": true,
+    "license": "UNLICENSED",
+    "scripts": {
+        "back": "cd back&&npm run start:dev",
+        "front": "cd front && ng serve"
+    },
+    "dependencies": {
+        "bootstrap": "^5.1.3",
+        "react-router-dom": "^6.2.1"
+    }
+}
