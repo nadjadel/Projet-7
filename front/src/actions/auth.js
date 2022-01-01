@@ -5,11 +5,9 @@ import {
   LOGIN_FAIL,
   LOGOUT,
   SET_MESSAGE,
-  GET_CONTACT_SUCCESS,
 } from "./types";
 
 import AuthService from "../services/auth.service";
-import { getContacts } from "./contact";
 
 export const register = (firstName,lastName,avatar, email, password) => (dispatch) => {
   return AuthService.register(firstName,lastName,avatar, email, password).then(

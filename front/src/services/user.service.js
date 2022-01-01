@@ -13,7 +13,7 @@ class UserService {
   }
 
   addComment(comment) {
-    return axios.post(API_URL+comment.postId+'comment' ,comment, { headers: authHeader() });
+    return axios.post(API_URL+comment.postId+'/comment' ,comment, { headers: authHeader() });
   }
 
   addLike(like) {
@@ -27,7 +27,7 @@ class UserService {
     return axios.put(API_URL+post,{isVisible:false} ,{ headers: authHeader() });
   }
   deleteComment(comment){
-    return axios.delete(API_URL+comment+'/comment', { headers: authHeader() });
+    return axios.delete(API_URL+'comment/'+comment, { headers: authHeader() });
   }
 }
 

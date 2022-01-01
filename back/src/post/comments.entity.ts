@@ -16,7 +16,7 @@ export class Comment {
     @Column({ type: "timestamp", default: () => "CURRENT_TIMESTAMP"}) 
     date:string;
 
-    @Column() 
+    @Column({default:true}) 
     isVisible:boolean;
 
     @ManyToOne(() => Posts, posts => posts.comments)
@@ -30,8 +30,11 @@ export class Comment {
     @JoinTable()
     userId: User;
 
+    @Column({ nullable: true })
+    repliesId?: number;
+
     @ManyToOne(() => Comment, comment => comment.id)
-    @JoinTable()
+    @JoinColumn({ name: "repliesId" })
     replies: Posts;
 
 

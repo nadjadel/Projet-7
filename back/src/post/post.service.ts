@@ -50,5 +50,10 @@ export class PostService {
 
   async comment(postComment){
     let commentedPost=await this.commentRepository.save(postComment);
+    return commentedPost;
+  }
+
+  async deleteComment(id){
+    await this.commentRepository.delete(id);
   }
 }

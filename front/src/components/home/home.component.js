@@ -2,14 +2,14 @@ import React, { Component } from "react";
 import "./home.css";
 import Post from "../post/post.component";
 import Side from "../side/side.component";
+import Contact from "../contact/contact.component";
 import { connect } from "react-redux";
 import UserService from "../../services/user.service";
 import { Avatar } from "@material-ui/core";
 import { getPost } from "../../actions/post";
 import { getContacts } from "../../actions/contact";
 import "font-awesome/css/font-awesome.min.css";
-import { AttachFile, Clear } from "@material-ui/icons";
-import authService from "../../services/auth.service";
+import { AttachFile } from "@material-ui/icons";
 
 class Home extends Component {
   constructor(props) {
@@ -57,8 +57,11 @@ class Home extends Component {
     this.props.dispatch(getContacts(this.props.user.userId));
   }
   componentDidUpdate(prevProps) {
-    if (prevProps.value !== this.props.value) {
-      this.setState({ posts: this.props.posts, contacts: this.props.contacts });
+    if (prevProps.posts !== this.props.posts) {
+      this.setState({ posts: this.props.posts });
+    }
+    if (prevProps.contacts !== this.props.contacts) {
+      this.setState({ contacts: this.props.contacts });
     }
   }
   render() {
@@ -119,22 +122,10 @@ class Home extends Component {
         </div>
         <div className="feed">
           <h5>Contacts</h5>
-          <ul className="contact">
-            {this.props.contacts.map((element) => (
-              <li key={element.id}>
-                <Avatar src={element.contactId.imageUrl} />
-                {element.contactId.firstName + " " + element.contactId.lastName}
-                <Clear
-                  fontSize="small"
-                  color="disabled"
-                  onClick={() => {
-                    authService.deleteContact(element.id).then((res)=>
-                    this.props.dispatch(getContacts(this.props.user.userId)))
-                  }}
-                />
-              </li>
-            ))}
-          </ul>
+         <Contact 
+         contacts={this.props.contacts} 
+         userId={this.props.user.userId}
+         />
         </div>
       </div>
     );

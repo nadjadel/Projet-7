@@ -1,7 +1,8 @@
 import {
 GET_POSTS_SUCCESS,
 GET_POSTS_FAIL,
-LOGOUT
+LOGOUT,
+SET_MESSAGE
   } from "./types";
 import userService from "../services/user.service";
 
@@ -32,6 +33,12 @@ export const getPost=()=>(dispatch)=>{
           dispatch({
             type: GET_POSTS_FAIL,
           });
+          
+          dispatch({
+            type:SET_MESSAGE,
+            payload:message
+          })
+    
     
           dispatch({
             type: LOGOUT

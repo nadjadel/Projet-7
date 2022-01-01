@@ -99,7 +99,14 @@ export class PostController {
   @Post(':id/comment')
   @UseGuards(AuthGuard())
   async commentPost(@Body() post, @Param('id') id: number) {
-    await this.postsService.comment(post);
+    console.log(post)
+    return await this.postsService.comment(post);
+   
+  }
+  @Delete('comment/:id')
+  @UseGuards(AuthGuard())
+  async deletComment(@Body() post, @Param('id') id: number) {
+    await this.postsService.deleteComment(id);
     return null;
   }
 }

@@ -1,6 +1,7 @@
 import {
     GET_CONTACT_SUCCESS,
-    GET_CONTACT_FAIL
+    GET_CONTACT_FAIL,
+    SET_MESSAGE
       } from "./types";
     import AuthService from "../services/auth.service";
     
@@ -25,6 +26,11 @@ import {
               dispatch({
                 type: GET_CONTACT_FAIL,
               });
+
+              dispatch({
+                type:SET_MESSAGE,
+                payload:message
+              })
         
               
               return Promise.reject();

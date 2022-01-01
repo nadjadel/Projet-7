@@ -17,6 +17,7 @@ import {
 import userService from "../../services/user.service";
 import AuthService from "../../services/auth.service";
 import Menu from "@material-ui/core/Menu";
+import Comments from "../comment/Comments";
 import MenuItem from "@material-ui/core/MenuItem";
 import { getPost } from "../../actions/post";
 import { getContacts } from "../../actions/contact";
@@ -33,6 +34,7 @@ class Post extends Component {
     this.handleDelete = this.handleDelete.bind(this);
     this.handleFlag = this.handleFlag.bind(this);
     this.handleAddFriend = this.handleAddFriend.bind(this);
+
     this.getIndex = this.props.posts.findIndex(
       (x) => x.id === this.props.post.id
     );
@@ -43,7 +45,10 @@ class Post extends Component {
       like: "",
       likeId: null,
       likesNumber: this.props.post.likes.length,
-      commentNumber:this.props.post.comments.length
+      commentNumber: this.props.post.comments.length,
+      commentValue: "",
+      showComment: false,
+      post: this.props.post,
     };
   }
 
@@ -75,12 +80,17 @@ class Post extends Component {
       userId: this.props.user.userId,
       contactId: this.props.post.userId.id,
     };
-    AuthService.addContact(contact)
-      this.props.dispatch(getContacts(this.props.user.userId));
-   
+    AuthService.addContact(contact).then(()=>{
+    this.props.dispatch(getContacts(this.props.user.userId));})
   }
 
-  handleComment() {}
+  handleComment() {
+    if (this.state.showComment) {
+      this.setState({ showComment: false });
+    } else {
+      this.setState({ showComment: true });
+    }
+  }
 
   handleDelete = () => {
     userService.deletePost(this.props.post.id);
@@ -111,6 +121,12 @@ class Post extends Component {
   handleClose = () => {
     this.setState({ open: false });
   };
+
+  componentDidUpdate(prevProps) {
+    if (prevProps.post !== this.props.post) {
+      this.setState({ post: this.props.post });
+    }
+  }
   render() {
     return (
       <div className="post">
@@ -218,6 +234,17 @@ class Post extends Component {
             </Menu>
           </div>
         </div>
+        {this.state.showComment ? (
+          <div className="postComment">
+            <Comments
+              currentUserId={this.props.user.userId}
+              comments={this.props.post.comments}
+              postId={this.props.post.id}
+            />
+          </div>
+        ) : (
+          <div></div>
+        )}
       </div>
     );
   }

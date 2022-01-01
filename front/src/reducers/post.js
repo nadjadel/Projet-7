@@ -9,7 +9,7 @@ import {
           posts: []
       }
 
-      export default function (state = initialState, action) {
+      export default function postReducer(state = initialState, action) {
         const { type, payload } = action;
       
         switch (type) {
