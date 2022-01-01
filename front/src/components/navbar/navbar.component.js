@@ -4,39 +4,44 @@ import { connect } from "react-redux";
 import { Avatar } from "@material-ui/core";
 import "font-awesome/css/font-awesome.min.css";
 import "./navbar.css";
+import { Search, Home, Group, Flag } from "@material-ui/icons";
 
 class Navbar extends Component {
   render() {
     const { user: currentUser } = this.props;
 
     return (
-      <nav className="navbar sticky-top navbar-expand navbar-light ">
-        <Link to={"/"} className="navbar-brand">
-          <img src="/icon.svg" height="40" width="40" alt="logo"/>
+      <nav className="navbar sticky-top navbar-light ">
+        
+        <Link to={"/home"} className="navbar-brand">
+          <img src="icon.svg" height="40" width="40" alt="logo"/>
           <label className="label">Groupomania</label>
         </Link>
        
         <div className="navbar-nav middlenav">
+        <ul>
         <li className="nav-item">
-            <div className="input">
-              <form>
-                <input type="text" className="search" />
-                <i className="fa fa-search"></i>
-              </form>
+            <div >
+              <div className="input">
+                <input type="text" className="search-input" />
+                <Search className="search-icon"/>
+              </div>
             </div>
           </li>
+          </ul>
           <div>
-            <i className="fa fa-home"></i>
+            <Home className="icon" fontSize="large"/>
           </div>
           <div>
-            <i className="fa fa-group"></i>
+            <Group className="icon" fontSize="large"/>
           </div>
           <div>
-            <i className="fa fa-flag"></i>
+            <Flag className="icon" fontSize="large"/>
           </div>
         </div>
         {currentUser ? (
           <div className="navbar-nav ml-auto rightnav">
+            <ul>
              <li className="nav-item">
              
              <Avatar src={currentUser.user.avatar}/>
@@ -54,9 +59,11 @@ class Navbar extends Component {
                 Déconnecter
               </a>
             </li>
+            </ul>
           </div>
         ) : (
-          <div className="navbar-nav ml-auto right">
+          <div className="navbar-nav ml-auto rightnav">
+            <ul>
             <li className="nav-item">
               <Link to={"/login"} className="nav-link">
                 Connecter
@@ -68,6 +75,7 @@ class Navbar extends Component {
                 S'enregistrer
               </Link>
             </li>
+            </ul>
           </div>
         )}
       </nav>

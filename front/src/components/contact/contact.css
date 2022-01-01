@@ -1,0 +1,8 @@
+.contact{
+    list-style-type:none;
+     }
+  .contact>li{
+    display: flex;
+    flex:row nowrap;
+    gap:10px;
+  }

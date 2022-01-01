@@ -5,6 +5,7 @@ import authService from "../../services/auth.service";
 import { getContacts } from "../../actions/contact";
 import { useState, useEffect } from "react";
 import { Clear } from "@material-ui/icons";
+import './contact.css'
 
 const Contact = ({ contacts, userId }) => {
   const [backendContacts, setBackendContacts] = useState(contacts);

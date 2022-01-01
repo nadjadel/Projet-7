@@ -1,26 +1,25 @@
-.container-home{
-    display: flex;
-    flex-flow: row nowrap;
-justify-content: space-between;
-gap:50px;
-margin:0px;
-
+.container-home {
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: space-between;
+  gap: 50px;
+  margin: 0px;
 }
-.left-home{
+.left-home {
   flex: 0 0 15%;
-    
-      margin-left: 50px;
-      position: fixed;
-      order: 1;
+
+  margin-left: 50px;
+  position: fixed;
+  order: 1;
 }
-.main-home{
- margin-left:20%;
-    flex: 0 0 50%;
-    position: relative;
-    order: 2;
+.main-home {
+  margin-left: 20%;
+  flex: 0 0 50%;
+  position: relative;
+  order: 2;
 }
 
-.feed{
+.feed {
   margin-left: 75%;
   flex: 0 0 15%;
   position: fixed;
@@ -28,69 +27,57 @@ margin:0px;
 }
 
 .on-your-mind {
-    background-color: #F0F2F5;
-    display: inline-block;
-    outline: none;
-    border: none;
-    padding: 10px 20px;
-    border-radius: 20px;
-    width: 100%;
-  }
+  background-color: #f0f2f5;
+  display: inline-block;
+  outline: none;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 20px;
+  width: 100%;
+}
 
-  .post-message {
-    border-radius: 10px;
-    display: flex;
-    flex-direction: column;
-  }
-  .post-message-header{
-    padding-bottom: 20px; 
-    border-bottom: 1px solid lightgray;
-    width:100%;
-          display: flex;
-          align-items: center;
+.post-message {
+  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+}
+.post-message-header {
+  padding-bottom: 20px;
+  border-bottom: 1px solid lightgray;
+  width: 100%;
+  display: flex;
+  align-items: center;
+}
 
-  }
+.card-body {
+  align-self: center;
+  display: flex;
+  justify-content: space-between;
+  padding: 10px 40px;
+  width: 90%;
+  margin-top: 10px;
+  align-items: center;
+}
 
-  .card-body {
-    align-self: center;
-    display: flex;
-    justify-content:space-between;
-    padding: 10px 40px;
-    width: 90%;
-    margin-top: 10px;
-    align-items: center;
+@media screen and (max-width: 900px) {
+  .feed,
+  .label,
+  .avatar {
+    display: none;
   }
-  .contact{
-    list-style-type:none;
-     }
-  .contact>li{
-    display: flex;
-    flex:row nowrap;
-    gap:10px;
+  .main-home {
+    flex: 0 0 5%;
+    margin-left: 10%;
   }
+  .left-home {
+    flex: 0 0 5%;
 
-  @media  screen and (max-width:900px ){
-    .feed,
-    .label,
-    .avatar
-    {
-      display: none;
-    }
-    .main-home{
-      flex:0 0 5%;
-      margin-left:10%;
-    }
-    .left-home{
-      flex: 0 0 5%;
-        
-          margin-left: 10px;
-          position: fixed;
-          order: 1;
-    }
-    .post-message,
-    .card{
-     
-      width: 80vw;
-    }
-
-  }   
+    margin-left: 10px;
+    position: fixed;
+    order: 1;
+  }
+  .post-message,
+  .card {
+    width: 80vw;
+  }
+}
