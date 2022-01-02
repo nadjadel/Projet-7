@@ -85,10 +85,13 @@ class Post extends Component {
   }
 
   handleComment() {
+    
     if (this.state.showComment) {
       this.setState({ showComment: false });
+      this.props.dispatch(getPost());
     } else {
       this.setState({ showComment: true });
+      this.props.dispatch(getPost());
     }
   }
 

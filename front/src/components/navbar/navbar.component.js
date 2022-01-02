@@ -11,11 +11,11 @@ class Navbar extends Component {
     const { user: currentUser } = this.props;
 
     return (
-      <nav className="navbar sticky-top navbar-light ">
+      <nav className="navbar sticky-top ">
         
         <Link to={"/home"} className="navbar-brand">
-          <img src="icon.svg" height="40" width="40" alt="logo"/>
-          <label className="label">Groupomania</label>
+          <img src="icon-left-font-monochrome-white.svg" height="60" width="120" alt="logo"/>
+          
         </Link>
        
         <div className="navbar-nav middlenav">

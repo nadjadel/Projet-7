@@ -3,11 +3,12 @@ nav {
   z-index: 1000;
   display: flex;
   justify-content: space-evenly;
-  background-color: white;
+  background-color: #132643;
   padding: 5px;
   position: fixed;
   top: 0;
   width: 100%;
+  color:white;
 }
 
 .navbar-brand {
@@ -21,6 +22,7 @@ nav {
   gap: 10px;
   flex: 0.5;
   height: 100%;
+  color:white
 }
 
 .input {
@@ -51,6 +53,7 @@ nav {
   align-items: center;
   flex: 0.5;
   flex-direction: row;
+  color:white;
   
 }
 .middlenav >ul{
@@ -61,13 +64,13 @@ nav {
   height: 100%;
   width: 90%;
   display: flex;
-
+  
   align-items: center;
   padding: 18px 15px;
   justify-content: center;
 }
 .icon {
-  color: #1877f2;
+  color: #d1515a;
 }
 
 .profile {
@@ -77,6 +80,7 @@ nav {
   display: block;
   border-radius: 50%;
   cursor: pointer;
+  color:white;
 }
 
 .rightnav {
@@ -86,6 +90,7 @@ nav {
   align-items: center;
   justify-content: flex-end;
   align-items: flex-end;
+  color:white;
 }
 
 .rightnav > ul {
@@ -94,7 +99,13 @@ nav {
   list-style-type: none;
   padding: 15px;
   gap: 10px;
+ 
 }
+
+a:-webkit-any-link,.nav-link{
+  color:white;
+}
+
 
 @media screen and (max-width: 900px) {
   .middlenav,
