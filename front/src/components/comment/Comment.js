@@ -87,7 +87,7 @@ const Comment = ({
                 deleteComment={deleteComment}
                 addComment={addComment}
                 repliesId={comment.id}
-                replies={comment.children}
+                replies={comment.children||[]}
                 currentUserId={currentUserId}
               />
             ))}
