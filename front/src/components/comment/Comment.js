@@ -86,8 +86,8 @@ const Comment = ({
                 activeComment={activeComment}
                 deleteComment={deleteComment}
                 addComment={addComment}
-                parentId={comment.id}
-                replies={[]}
+                repliesId={comment.id}
+                replies={comment.children}
                 currentUserId={currentUserId}
               />
             ))}
