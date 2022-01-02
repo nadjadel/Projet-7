@@ -64,6 +64,7 @@ class App extends Component {
         
 
           <div className="mt-3">
+        
             <Switch>
             <Route path="/login" component={Login} />
               <Route path="/register" component={Register} />
@@ -72,6 +73,7 @@ class App extends Component {
               <RouteProtected  path= "/" component={Home} />
               
             </Switch>
+           
           </div>
 
           {/* <AuthVerify logOut={this.logOut}/> */}

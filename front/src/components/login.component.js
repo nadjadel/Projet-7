@@ -95,7 +95,7 @@ class Login extends Component {
             }}
           >
             <div className="form-group">
-              <label htmlFor="email">Email</label>
+              <label htmlFor="email" for="email">Email</label>
               <Input
                 type="text"
                 className="form-control"
@@ -107,7 +107,7 @@ class Login extends Component {
             </div>
 
             <div className="form-group">
-              <label htmlFor="password">Mot de passe</label>
+              <label htmlFor="password" for="password">Mot de passe</label>
               <Input
                 type="password"
                 className="form-control"

@@ -2,6 +2,7 @@
   "name": "Groupomania",
   "version": "0.1.0",
   "private": true,
+  "homepage": "https://nadjadel.github.io/Projet-7/",
   "dependencies": {
     "@dhaiwat10/react-link-preview": "^1.12.2",
     "@fortawesome/fontawesome-svg-core": "^1.2.36",
@@ -22,6 +23,7 @@
     "react-native-advanced-dropdown": "^1.0.6",
     "react-redux": "^7.2.1",
     "react-router-dom": "^5.2.0",
+    "react-router-redux": "^4.0.8",
     "react-scripts": "^5.0.0",
     "react-validation": "^3.0.7",
     "redux": "^4.0.5",
@@ -34,7 +36,7 @@
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "predeploy": "npm run build",
-  "deploy": "gh-pages -d build"
+    "deploy": "gh-pages -d build"
   },
   "eslintConfig": {
     "extends": "react-app"
