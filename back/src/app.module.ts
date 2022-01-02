@@ -17,7 +17,16 @@ import { FriendsModule } from './friends/friends.module';
       dest: './files',
     }),
    
-    TypeOrmModule.forRoot(),
+    TypeOrmModule.forRoot({
+      "type": "mysql",
+      "host": "sql11.freemysqlhosting.net",
+      "port": 3306,
+      "username": "sql11462604",
+      "password": "xC843zV5ZW",
+      "database": "sql11462604",
+      "entities": ["dist/**/*.entity{.ts,.js}"],
+      "synchronize": true
+    }),
 
     AuthModule,
 
