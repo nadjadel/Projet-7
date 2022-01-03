@@ -1,7 +1,7 @@
 .container{
     display:flex;
     flex-flow: row nowrap;
-    justify-content: space-evenly;
+    justify-content: space-between;
 }
 
 .left-profile{
@@ -20,6 +20,19 @@ justify-content: center;
     align-items: flex-start;
     
     }
+
+    .button{
+        display: flex;
+        justify-content: space-between;
+    }
+
+   .primary{
+       background-color: #132643;
+       color:white;
+   }
+   .secondary{
+    background-color: #d1515a;
+   }
 
     @media  screen and (max-width:900px ){
         .container{

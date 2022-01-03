@@ -8,6 +8,7 @@ import DialogContent from "@material-ui/core/DialogContent";
 import DialogTitle from "@material-ui/core/DialogTitle";
 import DialogActions from "@material-ui/core/DialogActions";
 import "./profile.css";
+import authService from "../../services/auth.service";
 
 class Profile extends Component {
   constructor(props) {
@@ -21,6 +22,9 @@ class Profile extends Component {
     this.handleClickOpen = this.handleClickOpen.bind(this);
     this.handleChangePassword = this.handleChangePassword.bind(this);
     this.handleChangeAttributes = this.handleChangeAttributes.bind(this);
+    this.handleSuspendAccount=this.handleSuspendAccount.bind(this);
+
+    this.handleConfirm=this.handleConfirm.bind(this)
     this.data = new FormData();
     this.state = {
       userId: currentUser.userId,
@@ -29,6 +33,7 @@ class Profile extends Component {
       lastName: currentUser.user.lastName,
       password: "",
       open: false,
+      confirm:false
     };
   }
 
@@ -57,6 +62,18 @@ class Profile extends Component {
       lastName: this.state.lastName,
     };
     AuthService.update(updatedPassword);
+  }
+
+  handleConfirm(validated) {
+   if(validated){
+     authService.suspendAccount(this.props.user.userId).then(()=>this.setState({confirm:false}))
+   }else{
+    this.setState({confirm:false})
+   }
+  }
+  handleSuspendAccount(){
+    this.setState({ confirm: true });
+  
   }
 
   onChangeEmail(e) {
@@ -123,6 +140,16 @@ class Profile extends Component {
             <Button onClick={this.handleChangePassword}>valider</Button>
           </DialogActions>
         </Dialog>
+        <Dialog open={this.state.confirm} onClose={this.handleClose}>
+         
+          <DialogContent>
+          Etes vous sur?
+          </DialogContent>
+          <DialogActions>
+          <button onClick= {()=>this.handleConfirm(true)}>Oui</button>
+           <button onClick= {()=>this.handleConfirm(false)}>Non</button>
+          </DialogActions>
+        </Dialog>
         <div className="left-profile">
           <img
             src={currentUser.user.avatar||'//ssl.gstatic.com/accounts/ui/avatar_2x.png'}
@@ -172,17 +199,26 @@ class Profile extends Component {
               value={`${this.state.lastName}`}
             />
           </p>
-          <p>
+          <div className="button">
+            <div>
           <button
-            className="btn btn-primary"
+            className="btn primary"
             onClick={this.handleChangeAttributes}
           >
             modifier attributs
           </button>
-          <button className="btn btn-primary" onClick={this.handleClickOpen}>
+          </div>
+          <div>
+          <button className="btn primary" onClick={this.handleClickOpen}>
             modifier mot de passe
           </button>
-          </p>
+          </div>
+          <div>
+          <button className="btn secondary" onClick={this.handleSuspendAccount}>
+            Suspendre Compte
+          </button>
+          </div>
+          </div>
         </div>
       </div>
     );

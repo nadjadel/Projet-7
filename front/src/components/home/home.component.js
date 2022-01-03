@@ -104,7 +104,7 @@ class Home extends Component {
               </div>
               <div>
                 <button
-                  className="btn btn-primary"
+                  className="btn primary"
                   onClick={this.handlePosting}
                 >
                   Envoyer

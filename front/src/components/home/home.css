@@ -36,6 +36,11 @@
   width: 100%;
 }
 
+.primary{
+  
+  background-color: #132643;
+}
+
 .post-message {
   border-radius: 10px;
   display: flex;

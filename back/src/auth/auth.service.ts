@@ -61,7 +61,7 @@ export class AuthService {
 
     let jwt = this.jwtService.sign(data);
 
-    return { userId: user.id,token: jwt,user:{firstName:user.firstName,lastName:user.lastName,email:user.email,avatar:user.imageUrl,roles:user.roles} };
+    return { userId: user.id,token: jwt,user:{firstName:user.firstName,lastName:user.lastName,email:user.email,avatar:user.imageUrl,roles:user.roles,isActive:user.isActive} };
   }
 
   checkPassword = function (attempt, user, callback) {

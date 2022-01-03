@@ -25,7 +25,8 @@ import { FriendsModule } from './friends/friends.module';
       "password": "xC843zV5ZW",
       "database": "sql11462604",
       "entities": ["dist/**/*.entity{.ts,.js}"],
-      "synchronize": true
+      "synchronize": true,
+      
     }),
 
     AuthModule,
