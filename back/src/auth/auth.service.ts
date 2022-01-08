@@ -16,24 +16,21 @@ export class AuthService {
     let userToAttempt = await this.usersService.findOneByEmail(
       loginAttempt.email,
     );
-    
 
     return new Promise((resolve) => {
       // Check the supplied password against the hash stored for this email address
-     
+
       this.checkPassword(
         loginAttempt.password,
         userToAttempt[0],
         (err, isMatch) => {
-         
           if (err) throw new UnauthorizedException();
 
           if (isMatch) {
-           
             // If there is a successful match, generate a JWT for the user
             resolve(this.createJwtPayload(userToAttempt[0]));
           } else {
-            resolve( {message:'login/mot de passe incorrect!'})
+            resolve({ message: 'login/mot de passe incorrect!' });
           }
         },
       );
@@ -48,12 +45,11 @@ export class AuthService {
     if (user) {
       return this.createJwtPayload(user);
     } else {
-      return {message:'Token expiré!'}
+      return { message: 'Token expiré!' };
     }
   }
 
   createJwtPayload(user) {
-    
     let data: JwtPayload = {
       id: user.id,
       email: user.email,
@@ -61,7 +57,19 @@ export class AuthService {
 
     let jwt = this.jwtService.sign(data);
 
-    return { userId: user.id,token: jwt,user:{firstName:user.firstName,lastName:user.lastName,email:user.email,avatar:user.imageUrl,roles:user.roles,isActive:user.isActive} };
+    return {
+      userId: user.id,
+      token: jwt,
+      isActive: user.isActive,
+      user: {
+        firstName: user.firstName,
+        lastName: user.lastName,
+        email: user.email,
+        avatar: user.imageUrl,
+        roles: user.roles
+       
+      }
+    };
   }
 
   checkPassword = function (attempt, user, callback) {

@@ -39,10 +39,10 @@ class AuthService {
   getContact(id){
     return axios.get(API_URL+'contact/'+id , { headers: authHeader() });
   }
-  suspendAccount(id){
+  setAccount(id,action){
    const accountToSuspend={
-      idd:id,
-      isActive:false
+      id:id,
+      isActive:action
     }
     return axios.put(API_URL + "users", accountToSuspend,{ headers: authHeader() });
   }

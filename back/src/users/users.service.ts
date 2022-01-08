@@ -20,7 +20,7 @@ export class UsersService {
     }
     async findOneByEmail(email: string): Promise<User[]> {
         return await this.usersRepository.find({
-            select: ['id','email','password','firstName','lastName','imageUrl','roles'],
+            select: ['id','email','password','firstName','lastName','imageUrl','roles','isActive'],
             where: [{ "email": email }]
         });
     }
@@ -39,11 +39,10 @@ export class UsersService {
     }
 
     async updateUser(user: User) {
-        const userToUpdate=await this.getUser(user.id)
+       console.log(user)
         if(user.password){user.password=await bcrypt.hash(user.password, 10)}
-       const userUpdated={...userToUpdate[0],...user} 
-       console.log(userUpdated)
-     return await   this.usersRepository.save(userUpdated)
+
+     return await   this.usersRepository.update(user.id,user)
     }
 
     async deleteUser(user: User) {

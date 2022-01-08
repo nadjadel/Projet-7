@@ -5,6 +5,7 @@ import {
   LOGIN_FAIL,
   LOGOUT,
   SET_MESSAGE,
+  SET_ISACTIVE,
 } from "./types";
 
 import AuthService from "../services/auth.service";
@@ -84,3 +85,14 @@ export const logout = () => (dispatch) => {
     type: LOGOUT,
   });
 };
+
+export const isActive=(id,action)=> (dispatch)=>{
+  AuthService.setAccount(id,action).then((data) => {
+    dispatch({
+      type: SET_ISACTIVE,
+      payload: { isActive: action },
+    });
+
+    return Promise.resolve();
+  })
+}

@@ -8,20 +8,35 @@ import { getPost } from "../../actions/post";
 import { useState, useEffect } from "react";
 
 
-const Comments = ({ comments, currentUserId,postId }) => {
+const Comments = ({ comments, currentUserId,postId,role }) => {
   const [backendComments, setBackendComments] = useState(comments);
   const [activeComment, setActiveComment] = useState(null);
   const dispatch=useDispatch()
-  const rootComments = backendComments.filter(
-    (backendComment) => backendComment.repliesId === null
-  );
-  const getReplies = (commentId) =>
-    backendComments
-      .filter((backendComment) => backendComment.repliesId === commentId)
-      .sort(
-        (a, b) =>
-          new Date(b.date).getTime() - new Date(a.date).getTime()
-      );
+  
+  function createTree(list) {
+    var map = {},
+      node,
+      roots = [],
+      i
+  
+    for (i = 0; i < list.length; i += 1) {
+      map[list[i].id] = i // initialize the map
+      list[i].children = [] // initialize the children
+    }
+  
+    for (i = 0; i < list.length; i += 1) {
+      node = list[i]
+      if (node.repliesId) {
+        // if you have dangling branches check that map[node.parentId] exists
+        list[map[node.repliesId]].children.push(node)
+      } else {
+        roots.push(node)
+      }
+    }
+    return roots
+  }
+  
+ 
       
   const addComment =  (text, repliesId) => {
     const  messageToSend={
@@ -62,17 +77,16 @@ const Comments = ({ comments, currentUserId,postId }) => {
       <div className="comment-form-title">Ecrire un commentaire</div>
       <CommentForm submitLabel="Ecrire" handleSubmit={addComment} />
       <div className="comments-container">
-        {rootComments.map((rootComment) => (
+        {createTree(backendComments).map((rootComment) => (
           <Comment
             key={rootComment.id}
             comment={rootComment}
-            replies={getReplies(rootComment.id)}
             activeComment={activeComment}
             setActiveComment={setActiveComment}
             addComment={addComment}
             deleteComment={deleteComment}
             currentUserId={currentUserId}
-
+            role={role}
           />
         ))}
       </div>

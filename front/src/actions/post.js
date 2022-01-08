@@ -10,8 +10,8 @@ export const getPost=()=>(dispatch)=>{
     return userService.getPost().then(
         (response)=>{
 
-            
-      const sortedPosts = response.data.sort((a, b) => {
+      const activeUserPost=response.data.filter(x=>x.userId.isActive===true)    
+      const sortedPosts = activeUserPost.sort((a, b) => {
         return new Date(b.date) - new Date(a.date);
       });
       const filteredPosts=sortedPosts.filter(x=>(x.isVisible===true))

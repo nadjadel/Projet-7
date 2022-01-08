@@ -4,7 +4,7 @@ import { Entity, Column, PrimaryGeneratedColumn, BeforeInsert } from 'typeorm';
 export enum UserRole {
     ADMIN = "ROLE_ADMIN",
     MODERATOR = "ROLE_MODERATOR",
-    USER = ""
+    USER = "ROLE_USER"
 }
 
 

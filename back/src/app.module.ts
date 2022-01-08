@@ -18,12 +18,20 @@ import { FriendsModule } from './friends/friends.module';
     }),
    
     TypeOrmModule.forRoot({
-      "type": "mysql",
+     /* "type": "mysql",
       "host": "sql11.freemysqlhosting.net",
       "port": 3306,
       "username": "sql11462604",
       "password": "xC843zV5ZW",
-      "database": "sql11462604",
+      "database": "sql11462604",*/
+
+      "type": "mysql",
+      "host": "127.0.0.1",
+      "port": 3306,
+      "username": "root",
+      "password": "118133",
+      "database": "groupomania",
+
       "entities": ["dist/**/*.entity{.ts,.js}"],
       "synchronize": true,
       

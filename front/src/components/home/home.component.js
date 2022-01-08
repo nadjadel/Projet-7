@@ -123,7 +123,7 @@ class Home extends Component {
         <div className="feed">
           <h5>Contacts</h5>
          <Contact 
-         contacts={this.props.contacts} 
+         contacts={this.props.contacts.filter(x=>x.contactId.isActive===true)} 
          userId={this.props.user.userId}
          />
         </div>

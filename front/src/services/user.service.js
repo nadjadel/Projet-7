@@ -13,7 +13,7 @@ class UserService {
   }
 
   addComment(comment) {
-    return axios.post(API_URL+comment.postId+'/comment' ,comment, { headers: authHeader() });
+    return axios.post(API_URL+comment.posts+'/comment' ,comment, { headers: authHeader() });
   }
 
   addLike(like) {

@@ -38,6 +38,9 @@ class Post extends Component {
     this.getIndex = this.props.posts.findIndex(
       (x) => x.id === this.props.post.id
     );
+    this.existingContact=this.props.contacts.find(x=>x.contactId.id===this.props.post.userId.id)
+    this.commentNumber=this.props.posts[this.getIndex].comments.filter(x=>
+      x.userId.isActive===true).length
     this.devRef = React.createRef();
     this.state = {
       anchorEl: this.devRef.current,
@@ -81,6 +84,7 @@ class Post extends Component {
       contactId: this.props.post.userId.id,
     };
     AuthService.addContact(contact).then(()=>{
+      this.props.dispatch(getPost());
     this.props.dispatch(getContacts(this.props.user.userId));})
   }
 
@@ -172,7 +176,7 @@ class Post extends Component {
           <div className="postOption">
             <ChatBubbleOutline onClick={this.handleComment} />
             <p className="label">
-              {this.props.posts[this.getIndex].comments.length} Comment
+              {this.commentNumber} Comment
               {this.props.posts[this.getIndex].comments.length > 1 ? "s" : ""}
             </p>
           </div>
@@ -222,12 +226,13 @@ class Post extends Component {
                 <Flag />
                 Suivre
               </MenuItem>
-              {this.props.user.userId !== this.props.post.userId.id ? (
+              {(this.props.user.userId !== this.props.post.userId.id)&&!this.existingContact ? (
                 <MenuItem
                   key={this.props.post.id + "3"}
                   onClick={this.handleAddFriend}
                   className="list-group-item list-group-item-light"
                 >
+                 
                   <PersonAdd />
                   Ajouter contact
                 </MenuItem>
@@ -239,10 +244,12 @@ class Post extends Component {
         </div>
         {this.state.showComment ? (
           <div className="postComment">
+            
             <Comments
-              currentUserId={this.props.user.userId}
+             currentUserId={this.props.user.userId}
               comments={this.props.post.comments}
               postId={this.props.post.id}
+              role={this.props.user.user.roles}
             />
           </div>
         ) : (

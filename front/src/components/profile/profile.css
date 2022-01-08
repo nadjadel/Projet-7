@@ -33,6 +33,9 @@ justify-content: center;
    .secondary{
     background-color: #d1515a;
    }
+   .success{
+    background-color: #6fdfc3;
+   }
 
     @media  screen and (max-width:900px ){
         .container{

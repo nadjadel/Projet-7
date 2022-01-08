@@ -49,6 +49,7 @@ export class PostService {
   }
 
   async comment(postComment){
+    console.log(postComment)
     let commentedPost=await this.commentRepository.save(postComment);
     return commentedPost;
   }

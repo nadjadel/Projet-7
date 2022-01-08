@@ -4,14 +4,13 @@ import './comment.css'
 import { Avatar } from "@material-ui/core";
 const Comment = ({
   comment,
-  replies,
   setActiveComment,
   activeComment,
   updateComment,
   deleteComment,
   addComment,
-  repliesId = null,
   currentUserId,
+  role
 }) => {
   const isEditing =
     activeComment &&
@@ -22,10 +21,9 @@ const Comment = ({
     activeComment.id === comment.id &&
     activeComment.type === "replying";
   const canDelete =
-    currentUserId === comment.userId.id && replies.length === 0 ;
-  const canReply = Boolean(currentUserId)&& comment.repliesId === null;
-  const replyId = repliesId ? repliesId : comment.id;
-  const date = new Date(comment.date).toLocaleDateString();
+    (currentUserId === comment.userId.id||role==='ROLE_ADMIN') && (comment.children || []).length === 0 ;
+  const canReply = Boolean(currentUserId);
+ const date = new Date(comment.date).toLocaleDateString();
   return (
     <div key={comment.id} className="comment">
       <div className="comment-image-container">
@@ -73,21 +71,19 @@ const Comment = ({
         {isReplying && (
           <CommentForm
             submitLabel="Reply"
-            handleSubmit={(text) => addComment(text, replyId)}
+            handleSubmit={(text) => addComment(text, comment.id)}
           />
         )}
-        {replies.length > 0 && (
+        {(comment.children).length > 0 && (
           <div className="replies">
-            {replies.map((reply) => (
+            {(comment.children || []).filter(x=>x.userId.isActive===true).map((comment) => (
               <Comment
-                comment={reply}
-                key={reply.id}
+                comment={comment}
+                key={comment.id}
                 setActiveComment={setActiveComment}
                 activeComment={activeComment}
                 deleteComment={deleteComment}
                 addComment={addComment}
-                repliesId={comment.id}
-                replies={comment.children||[]}
                 currentUserId={currentUserId}
               />
             ))}

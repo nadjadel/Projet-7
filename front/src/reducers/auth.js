@@ -4,6 +4,7 @@ import {
   LOGIN_SUCCESS,
   LOGIN_FAIL,
   LOGOUT,
+  SET_ISACTIVE,
 } from "../actions/types";
 
 const user = JSON.parse(localStorage.getItem("user"));
@@ -43,6 +44,12 @@ export default function authReducer(state = initialState, action) {
         ...state,
         isLoggedIn: false,
         user: null,
+      };
+      case SET_ISACTIVE:
+      return {
+        ...state,
+        isLoggedIn: true,
+        user:{...user,isActive: payload.isActive},
       };
     default:
       return state;
