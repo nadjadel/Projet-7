@@ -66,8 +66,9 @@ class Home extends Component {
   }
   render() {
     const { user: currentUser } = this.props;
+    const blur=currentUser.isActive?("container-home"):("container-home blur")
     return (
-      <div className="container-home">
+     <div className= {blur}>)
         <div className="left-home">
           <Side />
         </div>

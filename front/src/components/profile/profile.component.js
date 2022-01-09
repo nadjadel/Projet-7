@@ -10,6 +10,7 @@ import DialogActions from "@material-ui/core/DialogActions";
 import "./profile.css";
 import authService from "../../services/auth.service";
 import { isActive } from "../../actions/auth";
+import { getPost } from "../../actions/post";
 
 class Profile extends Component {
   constructor(props) {
@@ -75,6 +76,7 @@ class Profile extends Component {
     }
     if (validated) {
      this.props.dispatch(isActive(this.props.user.userId, action))
+     this.props.dispatch(getPost())
      
     } 
     this.setState({ confirm: false });

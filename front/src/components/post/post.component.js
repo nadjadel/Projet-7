@@ -34,24 +34,17 @@ class Post extends Component {
     this.handleDelete = this.handleDelete.bind(this);
     this.handleFlag = this.handleFlag.bind(this);
     this.handleAddFriend = this.handleAddFriend.bind(this);
-
-    this.getIndex = this.props.posts.findIndex(
-      (x) => x.id === this.props.post.id
+    this.existingContact = this.props.contacts.find(
+      (x) => x.contactId.id === this.props.post.userId.id
     );
-    this.existingContact=this.props.contacts.find(x=>x.contactId.id===this.props.post.userId.id)
-    this.commentNumber=this.props.posts[this.getIndex].comments.filter(x=>
-      x.userId.isActive===true).length
     this.devRef = React.createRef();
     this.state = {
       anchorEl: this.devRef.current,
       open: false,
       like: "",
       likeId: null,
-      likesNumber: this.props.post.likes.length,
-      commentNumber: this.props.post.comments.length,
       commentValue: "",
       showComment: false,
-      post: this.props.post,
     };
   }
 
@@ -83,13 +76,13 @@ class Post extends Component {
       userId: this.props.user.userId,
       contactId: this.props.post.userId.id,
     };
-    AuthService.addContact(contact).then(()=>{
+    AuthService.addContact(contact).then(() => {
       this.props.dispatch(getPost());
-    this.props.dispatch(getContacts(this.props.user.userId));})
+      this.props.dispatch(getContacts(this.props.user.userId));
+    });
   }
 
   handleComment() {
-    
     if (this.state.showComment) {
       this.setState({ showComment: false });
       this.props.dispatch(getPost());
@@ -168,16 +161,34 @@ class Post extends Component {
           <div className="postOption">
             <ThumbUp onClick={this.handleLike} className={this.state.like} />
             <p className="label">
-              {this.props.posts[this.getIndex].likes.length} Like
-              {this.props.posts[this.getIndex].likes.length > 1 ? "s" : ""}
+              {
+                this.props.posts[
+                  this.props.posts.findIndex((x) => x.id === this.props.post.id)
+                ].likes.filter((x) => x.userId.isActive === true).length
+              }{" "}
+              Like
+              {this.props.posts[
+                this.props.posts.findIndex((x) => x.id === this.props.post.id)
+              ].likes.filter((x) => x.userId.isActive === true).length > 1
+                ? "s"
+                : ""}
             </p>
           </div>
 
           <div className="postOption">
             <ChatBubbleOutline onClick={this.handleComment} />
             <p className="label">
-              {this.commentNumber} Comment
-              {this.props.posts[this.getIndex].comments.length > 1 ? "s" : ""}
+              {
+                this.props.posts[
+                  this.props.posts.findIndex((x) => x.id === this.props.post.id)
+                ].comments.filter((x) => x.userId.isActive === true).length
+              }{" "}
+              Comment
+              {this.props.posts[
+                this.props.posts.findIndex((x) => x.id === this.props.post.id)
+              ].comments.filter((x) => x.userId.isActive === true).length > 1
+                ? "s"
+                : ""}
             </p>
           </div>
 
@@ -226,13 +237,13 @@ class Post extends Component {
                 <Flag />
                 Suivre
               </MenuItem>
-              {(this.props.user.userId !== this.props.post.userId.id)&&!this.existingContact ? (
+              {this.props.user.userId !== this.props.post.userId.id &&
+              !this.existingContact ? (
                 <MenuItem
                   key={this.props.post.id + "3"}
                   onClick={this.handleAddFriend}
                   className="list-group-item list-group-item-light"
                 >
-                 
                   <PersonAdd />
                   Ajouter contact
                 </MenuItem>
@@ -244,9 +255,8 @@ class Post extends Component {
         </div>
         {this.state.showComment ? (
           <div className="postComment">
-            
             <Comments
-             currentUserId={this.props.user.userId}
+              currentUserId={this.props.user.userId}
               comments={this.props.post.comments}
               postId={this.props.post.id}
               role={this.props.user.user.roles}

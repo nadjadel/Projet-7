@@ -1,9 +1,15 @@
 .container-home {
   display: flex;
   flex-flow: row nowrap;
-  justify-content: space-between;
+  
   gap: 50px;
   margin: 0px;
+}
+
+.blur{
+  filter: blur(8px);
+  -webkit-filter: blur(8px);
+
 }
 .left-home {
   flex: 0 0 15%;

@@ -92,7 +92,12 @@ export const isActive=(id,action)=> (dispatch)=>{
       type: SET_ISACTIVE,
       payload: { isActive: action },
     });
-
+  let userToModify= JSON.parse(localStorage.getItem('user'))
+  userToModify={
+      ...userToModify,
+      isActive: action,
+    };
+    localStorage.setItem('user',JSON.stringify(userToModify))
     return Promise.resolve();
   })
 }
